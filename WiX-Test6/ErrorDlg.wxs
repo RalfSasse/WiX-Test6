@@ -5,13 +5,13 @@
     
     <UI>
       
-      <Property Id="ErrorProperty"
-                Value="ErrorDialog" />
+      <Property Id="ErrorDialog"
+                Value="ErrorDlg" />
       
-      <Dialog Id="ErrorDialog"
+      <Dialog Id="ErrorDlg"
               Width="370"
               Height="270"
-              Title="Amazing Software"
+              Title="WiX-Test6 Installation"
               ErrorDialog="yes">
 
         <Control Id="ErrorText"
@@ -19,7 +19,8 @@
                  X="50"
                  Y="15"
                  Width="200"
-                 Height="60" />
+                 Height="60"
+                 TabSkip="no" />
 
         <Control Id="A"
                  Type="PushButton"

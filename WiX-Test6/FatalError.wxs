@@ -5,10 +5,10 @@
   
   <UI>
     
-    <Dialog Id="FatalErrorDialog"
+    <Dialog Id="FatalError"
             Width="370"
             Height="270"
-            Title="Amazing Software">
+            Title="WiX-Test6 Installation">
       
       <Control Id="Description"
                Type="Text"
@@ -35,12 +35,12 @@
   </UI>
   
   <InstallUISequence>
-    <Show Dialog="FatalErrorDialog"
+    <Show Dialog="FatalError"
           OnExit="error" />
   </InstallUISequence>
   
   <AdminUISequence>
-    <Show Dialog="FatalErrorDialog"
+    <Show Dialog="FatalError"
           OnExit="error" />
   </AdminUISequence>
   

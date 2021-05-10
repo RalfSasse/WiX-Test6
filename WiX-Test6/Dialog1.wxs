@@ -53,11 +53,11 @@
 -->
       <DialogRef Id="MeinZweitesDialogFenster" />
       <DialogRef Id="FortschrittDialogFenster" />
-      <DialogRef Id="FilesInUseDialog" />
-      <DialogRef Id="ErrorDialog" />
-      <DialogRef Id="FatalErrorDialog" />
-      <DialogRef Id="UserExitDialog" />
-      <DialogRef Id="ExitDialog" />
+      <DialogRef Id="FilesInUse" />
+      <DialogRef Id="ErrorDlg" />
+      <DialogRef Id="FatalError" />
+      <DialogRef Id="UserExit" />
+      <DialogRef Id="ExitDlg" />
 
       <!-- Dialog-Element
      Hier beginnt die Definition des Dialogfensters.
@@ -103,9 +103,9 @@
                  Type="PushButton"
                  X="115"
                  Y="243"
-                 Width="100"
+                 Width="56"
                  Height="17"
-                 Text="Weiter">
+                 Text="Info">
           
           <Publish Event="SpawnDialog"
                    Value="MeinZweitesDialogFenster" />

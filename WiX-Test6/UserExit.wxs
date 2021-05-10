@@ -5,10 +5,10 @@
   
   <UI>
     
-    <Dialog Id="UserExitDialog"
+    <Dialog Id="UserExit"
             Width="370"
             Height="270"
-            Title="Amazing Software">
+            Title="WiX-Test6 Installation">
       
       <Control Id="Description"
                Type="Text"
@@ -16,7 +16,7 @@
                Y="70"
                Width="220"
                Height="80"
-               Text="[ProductName] Installation wurde wegen eines Fehlers vorzeitig beendet. Ihr System wurde nicht verändert." />
+               Text="[ProductName] Installation wurde vom Benutzer abgebrochen. Ihr System wurde nicht verändert." />
       
       <Control Id="Finish"
                Type="PushButton"
@@ -36,12 +36,12 @@
   </UI>
   
   <InstallUISequence>
-    <Show Dialog="UserExitDialog"
+    <Show Dialog="UserExit"
           OnExit="cancel" />
   </InstallUISequence>
   
   <AdminUISequence>
-    <Show Dialog="UserExitDialog"
+    <Show Dialog="UserExit"
           OnExit="cancel" />
   </AdminUISequence>
   

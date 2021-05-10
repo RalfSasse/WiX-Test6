@@ -25,12 +25,12 @@
     <Compile Include="Dialog1.wxs" />
     <Compile Include="Dialog2.wxs" />
     <Compile Include="DialogFortschritt.wxs" />
-    <Compile Include="ErrorDialog.wxs" />
-    <Compile Include="ExitDialog.wxs" />
-    <Compile Include="FatalErrorDialog.wxs" />
-    <Compile Include="FilesInUseDialog.wxs" />
+    <Compile Include="ErrorDlg.wxs" />
+    <Compile Include="ExitDlg.wxs" />
+    <Compile Include="FatalError.wxs" />
+    <Compile Include="FilesInUse.wxs" />
     <Compile Include="Product.wxs" />
-    <Compile Include="UserExitDialog.wxs" />
+    <Compile Include="UserExit.wxs" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" Condition=" '$(WixTargetsPath)' != '' " />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets" Condition=" '$(WixTargetsPath)' == '' AND Exists('$(MSBuildExtensionsPath32)\Microsoft\WiX\v3.x\Wix.targets') " />

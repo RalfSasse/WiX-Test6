@@ -5,10 +5,10 @@
     
     <UI>
       
-      <Dialog Id="FilesInUseDialog"
+      <Dialog Id="FilesInUse"
               Width="370"
               Height="270"
-              Title="Amazing Software">
+              Title="WiX-Test6 Installation">
 
         <Control Id="InUseFiles"
                  Type="ListBox"

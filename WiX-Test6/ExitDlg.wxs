@@ -5,10 +5,10 @@
   
     <UI>
     
-      <Dialog Id="ExitDialog"
+      <Dialog Id="ExitDlg"
               Width="370"
               Height="270"
-              Title="Amazing Software">
+              Title="WiX-Test6 Installation">
         
         <Control Id="Description"
                  Type="Text"
@@ -37,12 +37,12 @@
   </UI>
     
   <InstallUISequence>
-    <Show Dialog="ExitDialog"
+    <Show Dialog="ExitDlg"
           OnExit="success" />
   </InstallUISequence>
     
   <AdminUISequence>
-    <Show Dialog="ExitDialog"
+    <Show Dialog="ExitDlg"
           OnExit="success" />
   </AdminUISequence>
     
