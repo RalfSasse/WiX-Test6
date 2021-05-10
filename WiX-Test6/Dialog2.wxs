@@ -23,6 +23,7 @@
      nicht vorgesehen. Das offizielle Statement von Microsoft lautet:
      The recommended method for displaying text with specified line breaks
      is to use multiple one-line text controls located below each other.
+     Also werden hier für einen dreizeiligen Text drei Textfelder angezeigt.
 -->
         <Control Id="MeinText1"
                  Type="Text"

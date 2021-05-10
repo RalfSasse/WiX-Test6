@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  
+
+<!-- ErrorDlg.wxs
+     Eines der fünf "Pflicht-Dialogfenstern", die in jedem MSI-Programm
+     enthalten sein müssen.
+     Zeigt während der Installation evtl. notwendige Fehlermeldungen an.
+     Wichtig ist das Property-Element, dessen Wert mit der Id des Dialog-
+     Elementes identisch sein muss. Erstes Control-Element muss der
+     "ErrorText" sein, und dieses muss das Attribut TabSkip="no" enthalten!
+     Sonst drohen Compilerfehler wie "ErrorDlg not found in Dialog table".
+     Auch die sieben Buttons sind Pflicht und müssen genau so geschrieben
+     werden. Ihre Position im Fenster kann (und sollte) identisch sein.
+-->
+
   <Fragment>
     
     <UI>

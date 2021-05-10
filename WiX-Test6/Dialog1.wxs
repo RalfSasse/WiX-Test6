@@ -78,13 +78,14 @@
      des Dialogfensters. Hier werden ein Textfeld und ein Schalter ("PushButton")
      mit der Aufschrift "Next" mit Größen- und Positionsangaben definiert.
      Im Textfeld wird demonstriert, wie man die weiter oben definierten Text-Styles
-     anwendet.
+     anwendet: Mit der Angabe {\Tahoma_Bold} innerhalb des Textes.
      Im Publish-Element wird festgelegt, was passieren soll, wenn der Benutzer den
-     Schalter anklickt.
+     dazu gehörigen Schalter anklickt.
      Mit dem Attribut "NewDialog" wird das aktuelle Dialogfenster geschlossen und
      stattdessen das nächste geöffnet (wie beim "FortschrittDialogFenster").
      Mit dem Attribut "SpawnDialog" wird ein Kindfenster geöffnet (z.B. eine MessageBox),
-     das aktuelle Fenster bleibt aber im Hintergrund sichtbar.
+     das aktuelle Fenster bleibt aber im Hintergrund sichtbar und bekommt den Fokus zurück,
+     sobald das Kindfenster geschlossen wird.
      Mit dem Attribut "EndDialog" wird das aktuelle Dialogfenster geschlossen, ohne
      dass ein weiteres Fenster geöffnet wird (beim Wert "Exit"). Wenn das aktuelle
      Dialogfenster das Kind eines anderen Fensters ist (also von diesem mit "SpawnDialog"
@@ -109,7 +110,6 @@
           
           <Publish Event="SpawnDialog"
                    Value="MeinZweitesDialogFenster" />
-          
         </Control>
 
         <Control Id="InstallButton"
@@ -122,7 +122,6 @@
           
           <Publish Event="NewDialog"
                    Value="FortschrittDialogFenster" />
-          
         </Control>
 
         <Control Id="CancelButton"
@@ -136,7 +135,6 @@
           
           <Publish Event="EndDialog"
                    Value="Exit" />
-          
         </Control>
         
       </Dialog>

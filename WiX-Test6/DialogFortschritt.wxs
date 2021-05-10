@@ -27,7 +27,6 @@
 
           <Publish Event="EndDialog"
                    Value="Exit" />
-
         </Control>
 
 <!-- Control-Element "ProgressBar"

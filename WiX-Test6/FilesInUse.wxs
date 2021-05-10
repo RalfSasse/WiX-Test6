@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  
+
+<!-- FilesInUse.wxs
+     Eines der fünf "Pflicht-Dialogfenstern", die in jedem MSI-Programm
+     enthalten sein müssen.
+     Ermöglicht es dem Benutzer, Programme zu beenden, die auf Dateien
+     zugreifen, die dieses MSI-Programm updaten oder löschen will.
+-->
+
   <Fragment>
     
     <UI>

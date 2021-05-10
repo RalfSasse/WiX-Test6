@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  
-<Fragment>
+
+<!-- FatalError.wxs
+     Eines der fünf "Pflicht-Dialogfenstern", die in jedem MSI-Programm
+     enthalten sein müssen.
+     Zeigt eine (statische) Fehlermeldung an, wenn ein nicht-behebbarer
+     Fehler auftritt.
+-->
+
+  <Fragment>
   
   <UI>
     
