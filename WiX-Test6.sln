@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "WiX-Test6", "WiX-Test6\WiX-Test6.wixproj", "{D77F10C7-3247-479A-9969-FE331CE6389B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D77F10C7-3247-479A-9969-FE331CE6389B}.Debug|x86.ActiveCfg = Debug|x86
+		{D77F10C7-3247-479A-9969-FE331CE6389B}.Debug|x86.Build.0 = Debug|x86
+		{D77F10C7-3247-479A-9969-FE331CE6389B}.Release|x86.ActiveCfg = Release|x86
+		{D77F10C7-3247-479A-9969-FE331CE6389B}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {193035D1-A0E0-4870-A4CF-08ADB574641E}
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Dialog1.wxs
+-->
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+<!-- Fragment-Element
+     Jedes Dialogfenster sollte in einer eigenen WXS-Datei definiert werden.
+     Das Fragment-Element ist dabei die Wurzel aller WXS-Dateien außer der
+     Hauptdatei "Product.wxs", die der main()-Funktion der meisten
+     Programmiersprachen entspricht.
+     Das Fragment-Element ist nur ein Container und hat keine Attribute.
+-->
+  <Fragment>
+
+<!-- UI = User Interface
+     Das UI-Element enthält die Information zum Aussehen und Verhalten des
+     Dialogfensters. Die Style-Attribute am Anfang legen die Schriftarten fest,
+     die benutzt werden sollen.
+     Das ID-Attribut des UI-Elements und alle Style-Elemente werden nur beim
+     ersten Dialogfenster eines Projektes benötigt und können bei zusätzlichen
+     Dialogfenstern weggelassen werden. Sie sind also sozusagen "vererbbar".
+     In den anderen Dialogfenstern steht dann nur ein UI-Element ohne Attribute.
+     Dort werden ID-Attribute nur in Dialog- und Control-Elementen benötigt.
+-->
+    <UI Id="MeinErstesSelbstgestricktesInstallProgramm">
+
+      <TextStyle Id="Tahoma_Regular"
+                 FaceName="Tahoma"
+                 Size="8" />
+      
+      <Property Id="DefaultUIFont"
+                Value="Tahoma_Regular" />
+      
+      <TextStyle Id="Tahoma_Bold"
+                 FaceName="Tahoma"
+                 Size="8"
+                 Bold="yes" />
+      
+      <TextStyle Id="Tahoma_Italic"
+                 FaceName="Tahoma"
+                 Size="8"
+                 Italic="yes" />
+      
+      <TextStyle Id="Tahoma_Title"
+                 FaceName="Tahoma"
+                 Size="12"
+                 Underline="yes" />
+
+<!-- DialogRef-Elemente
+     Verweise auf andere Dialogfenster
+-->
+      <DialogRef Id="MeinZweitesDialogFenster" />
+      <DialogRef Id="FortschrittDialogFenster" />
+      <DialogRef Id="FilesInUseDialog" />
+      <DialogRef Id="ErrorDialog" />
+      <DialogRef Id="FatalErrorDialog" />
+      <DialogRef Id="UserExitDialog" />
+      <DialogRef Id="ExitDialog" />
+
+      <!-- Dialog-Element
+     Hier beginnt die Definition des Dialogfensters.
+     Das Dialog-Element enthält Attribute für die Breite und Höhe des Dialogfensters
+     (in Pixeln) und für den Text in der Titelzeile.
+     Das NoMinimize-Attribut kann verhindern, dass der Benutzer das Dialogfenster
+     während der Installation minimiert. Hier ist es auf "no" gesetzt, was auch die
+     Voreinstellung ist - der Benutzer kann das Fenster also minimieren.
+-->
+      <Dialog Id="MeinErstesDialogFenster"
+              Width="370"
+              Height="270"
+              Title="WiX-Test6 Installation"
+              NoMinimize="no">
+
+<!-- Control-Element
+     Control-Elemente definieren Schalter, Textfelder, Checkboxen u.ä. innerhalb
+     des Dialogfensters. Hier werden ein Textfeld und ein Schalter ("PushButton")
+     mit der Aufschrift "Next" mit Größen- und Positionsangaben definiert.
+     Im Textfeld wird demonstriert, wie man die weiter oben definierten Text-Styles
+     anwendet.
+     Im Publish-Element wird festgelegt, was passieren soll, wenn der Benutzer den
+     Schalter anklickt.
+     Mit dem Attribut "NewDialog" wird das aktuelle Dialogfenster geschlossen und
+     stattdessen das nächste geöffnet (wie beim "FortschrittDialogFenster").
+     Mit dem Attribut "SpawnDialog" wird ein Kindfenster geöffnet (z.B. eine MessageBox),
+     das aktuelle Fenster bleibt aber im Hintergrund sichtbar.
+     Mit dem Attribut "EndDialog" wird das aktuelle Dialogfenster geschlossen, ohne
+     dass ein weiteres Fenster geöffnet wird (beim Wert "Exit"). Wenn das aktuelle
+     Dialogfenster das Kind eines anderen Fensters ist (also von diesem mit "SpawnDialog"
+     geöffnet wurde), muss der Wert "Return" angegeben werden, damit das Elternfenster
+     den Fokus zurück bekommt.
+-->
+        <Control Id="MeinText"
+                 Type="Text"
+                 X="10"
+                 Y="10"
+                 Width="200"
+                 Height="17"
+                 Text="{\Tahoma_Bold}Dies ist ein fett gedruckter Beispieltext." />
+        
+        <Control Id="Next"
+                 Type="PushButton"
+                 X="115"
+                 Y="243"
+                 Width="100"
+                 Height="17"
+                 Text="Weiter">
+          
+          <Publish Event="SpawnDialog"
+                   Value="MeinZweitesDialogFenster" />
+          
+        </Control>
+
+        <Control Id="InstallButton"
+                 Type="PushButton"
+                 Text="Installieren"
+                 Height="17"
+                 Width="56"
+                 X="245"
+                 Y="243">
+          
+          <Publish Event="NewDialog"
+                   Value="FortschrittDialogFenster" />
+          
+        </Control>
+
+        <Control Id="CancelButton"
+                 Type="PushButton"
+                 Text="Abbrechen"
+                 Height="17"
+                 Width="56"
+                 X="180"
+                 Y="243"
+                 Cancel="yes">
+          
+          <Publish Event="EndDialog"
+                   Value="Exit" />
+          
+        </Control>
+        
+      </Dialog>
+      
+    </UI>
+
+<!-- InstallUISequence-Element
+     An dieser Stelle wird das Installationsprogramm gestartet und das erste
+     Dialogfenster angezeigt. Die Anzahl und Reihenfolge der weiteren Dialogfenster
+     ergibt sich aus dem Inhalt der Publish-Elemente innerhalb der Control-Elemente.
+-->
+    <InstallUISequence>
+      
+      <Show Dialog="MeinErstesDialogFenster"
+            Before="ExecuteAction" />
+      
+    </InstallUISequence>
+
+  </Fragment>
+
+</Wix>

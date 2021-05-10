@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  
+  <Fragment>
+  
+    <UI>
+    
+      <Dialog Id="ExitDialog"
+              Width="370"
+              Height="270"
+              Title="Amazing Software">
+        
+        <Control Id="Description"
+                 Type="Text"
+                 X="50"
+                 Y="70"
+                 Width="220"
+                 Height="80"
+                 Text="[ProductName] Installation wurden erfolgreich abgeschlossen." />
+        
+        <Control Id="Finish"
+                 Type="PushButton"
+                 X="180"
+                 Y="243"
+                 Width="56"
+                 Height="17"
+                 Default="yes"
+                 Cancel="yes"
+                 Text="Beenden">
+          
+          <Publish Event="EndDialog"
+                 Value="Exit" />
+        </Control>
+        
+    </Dialog>
+      
+  </UI>
+    
+  <InstallUISequence>
+    <Show Dialog="ExitDialog"
+          OnExit="success" />
+  </InstallUISequence>
+    
+  <AdminUISequence>
+    <Show Dialog="ExitDialog"
+          OnExit="success" />
+  </AdminUISequence>
+    
+</Fragment>
+</Wix>
+

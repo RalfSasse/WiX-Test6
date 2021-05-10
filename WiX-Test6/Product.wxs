@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  
+<!-- Product-Element
+     Wurzel des gesamten Projektes; kommt nur in dieser Datei vor. Alle anderen
+     WXS-Dateien des Projektes haben ein Fragment-Element als Wurzel.
+     Das Language-Attribut definiert die Sprache: 1033 ist englisch, 1031 ist deutsch.
+     Das Codepage-Attribut ist notwendig, um in Texten Umlaute ausgeben zu können.
+-->
+	<Product Id="*" 
+           Name="WiX_Test6"
+           Language="1033"
+           Codepage="1252"
+           Version="1.0.0.0"
+           Manufacturer="RalfSasse"
+           UpgradeCode="11c424a1-8f8c-4d02-9f42-c9b4fdfb4a29">
+    
+		<Package InstallerVersion="200"
+             Compressed="yes"
+             InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    
+		<MediaTemplate />
+
+<!-- UIRef-Element
+     Verweis auf das User-Interface (UI-Element) in der Datei "Dialog1.wxs", in dem
+     das erste Dialogfenster des Installationsprogramms definiert ist. Dieser Verweis
+     führt dazu, dass alle Dialogfenster in das Hauptprogramm eingebunden werden.
+-->
+    <UIRef Id="MeinErstesSelbstgestricktesInstallProgramm" />
+
+		<Feature Id="ProductFeature"
+             Title="WiX_Test6"
+             Level="1">
+      
+			<ComponentGroupRef Id="ProductComponents" />
+    
+		</Feature>
+  
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR"
+               Name="SourceDir">
+      
+			<Directory Id="ProgramFilesFolder">
+        
+				<Directory Id="INSTALLFOLDER"
+                   Name="WiX_Test6" />
+      
+			</Directory>
+		</Directory>
+	</Fragment>
+
+	<Fragment>
+    
+		<ComponentGroup Id="ProductComponents"
+                    Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<!-- <Component Id="ProductComponent"> -->
+				<!-- TODO: Insert files, registry keys, and other resources here. -->
+			<!-- </Component> -->
+		</ComponentGroup>
+	</Fragment>
+</Wix>

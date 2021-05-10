@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  
+	<Fragment>
+    
+    <UI>
+      
+      <Dialog Id="FortschrittDialogFenster"
+              Width="370"
+              Height="270"
+              Title="WiX-Test6 Installation"
+              Modeless="no">
+
+<!-- Control-Element "Abbrechen"
+     Dieses Control-Element vom Typ "PushButton" steht hier an erster Stelle,
+     damit es beim Öffnen des Dialogfensters den Tastatur-Fokus erhält.
+-->
+        <Control Id="Abbrechen"
+                 Type="PushButton"
+                 TabSkip="no"
+                 X="180"
+                 Y="243"
+                 Width="100"
+                 Height="17"
+                 Cancel="yes"
+                 Text="Abbrechen">
+
+          <Publish Event="EndDialog"
+                   Value="Exit" />
+
+        </Control>
+
+<!-- Control-Element "ProgressBar"
+     Dieses Control-Element zeigt einen Fortschrittsbalken an, der den Fortschritt
+     der Installation anzeigt. Er ist "modeless", blockiert also nicht die anderen
+     Fenster, die auf dem Zielrechner geöffnet sind.
+     Das Subscribe-Element ist notwendig, damit der Fortschrittsbalken Ereignisse
+     vom Typ SetProgress erhält - sonst könnte er nicht funktionieren.
+-->
+        <Control Id="Fortschrittsbalken"
+                 Type="ProgressBar"
+                 X="70"
+                 Y="150"
+                 Width="200"
+                 Height="20"
+                 ProgressBlocks="yes">
+
+          <Subscribe Event="SetProgress"
+                     Attribute="Progress" />
+
+        </Control>
+
+      </Dialog>
+      
+    </UI>
+
+    <InstallUISequence>
+      
+      <Show Dialog="FortschrittDialogFenster"
+            After="MeinErstesDialogFenster" />
+      
+    </InstallUISequence>
+  
+  </Fragment>
+  
+</Wix>

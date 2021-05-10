@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  
+<Fragment>
+  
+  <UI>
+    
+    <Dialog Id="FatalErrorDialog"
+            Width="370"
+            Height="270"
+            Title="Amazing Software">
+      
+      <Control Id="Description"
+               Type="Text"
+               X="50"
+               Y="70"
+               Width="220"
+               Height="80"
+               Text="[ProductName] Installation wurde wegen eines Fehlers vorzeitig beendet. Ihr System wurde nicht verändert." />
+      
+      <Control Id="Finish"
+               Type="PushButton"
+               X="180"
+               Y="243"
+               Width="56"
+               Height="17"
+               Default="yes"
+               Cancel="yes"
+               Text="Beenden">
+        
+        <Publish Event="EndDialog"
+                 Value="Exit" />
+      </Control>
+    </Dialog>
+  </UI>
+  
+  <InstallUISequence>
+    <Show Dialog="FatalErrorDialog"
+          OnExit="error" />
+  </InstallUISequence>
+  
+  <AdminUISequence>
+    <Show Dialog="FatalErrorDialog"
+          OnExit="error" />
+  </AdminUISequence>
+  
+</Fragment>
+</Wix>
+    
+    
