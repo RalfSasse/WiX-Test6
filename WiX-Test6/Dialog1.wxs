@@ -26,12 +26,12 @@
 -->
     <UI Id="MeinErstesSelbstgestricktesInstallProgramm">
 
+      <Property Id="DefaultUIFont"
+                Value="Tahoma_Regular" />
+
       <TextStyle Id="Tahoma_Regular"
                  FaceName="Tahoma"
                  Size="8" />
-      
-      <Property Id="DefaultUIFont"
-                Value="Tahoma_Regular" />
       
       <TextStyle Id="Tahoma_Bold"
                  FaceName="Tahoma"
@@ -48,18 +48,65 @@
                  Size="12"
                  Underline="yes" />
 
+      <TextStyle Id="Tahoma_Red"
+                 FaceName="Tahoma"
+                 Red="255"
+                 Size="8" />
+
+      <TextStyle Id="Tahoma_Green"
+                 FaceName="Tahoma"
+                 Green="255"
+                 Size="8" />
+      
+      <TextStyle Id="Tahoma_Blue"
+                 FaceName="Tahoma"
+                 Blue="255"
+                 Size="8" />
+
+      <TextStyle Id="Tahoma_Yellow"
+                 FaceName="Tahoma"
+                 Red="255"
+                 Green="255"
+                 Size="8" />
+
+      <TextStyle Id="Tahoma_Magenta"
+                 FaceName="Tahoma"
+                 Red="255"
+                 Blue="255"
+                 Size="8" />
+
+      <TextStyle Id="Tahoma_Cyan"
+                 FaceName="Tahoma"
+                 Green="255"
+                 Blue="255"
+                 Size="8" />
+
+      <TextStyle Id="Tahoma_White"
+                 FaceName="Tahoma"
+                 Red="255"
+                 Green="255"
+                 Blue="255"
+                 Size="8" />
+      
+<!-- Binary-Element
+     Verweis auf eine im Dialogfenster verwendete Grafik-Datei (BMP oder JPG)
+-->
+      <Binary Id="Logo"
+              SourceFile="Logo.jpg" />
+
 <!-- DialogRef-Elemente
      Verweise auf andere Dialogfenster
 -->
       <DialogRef Id="MeinZweitesDialogFenster" />
       <DialogRef Id="FortschrittDialogFenster" />
+      <DialogRef Id="EasterEggFenster" />
       <DialogRef Id="FilesInUse" />
       <DialogRef Id="ErrorDlg" />
       <DialogRef Id="FatalError" />
       <DialogRef Id="UserExit" />
       <DialogRef Id="ExitDlg" />
 
-      <!-- Dialog-Element
+<!-- Dialog-Element
      Hier beginnt die Definition des Dialogfensters.
      Das Dialog-Element enthält Attribute für die Breite und Höhe des Dialogfensters
      (in Pixeln) und für den Text in der Titelzeile.
@@ -73,70 +120,147 @@
               Title="WiX-Test6 Installation"
               NoMinimize="no">
 
-<!-- Control-Element
+<!-- Control-Element "Bitmap"
+     Hier wird eine Grafik in "MeinErstesDialogfenster" eingefügt.
+     Das Attribut "Text" muss die Id des Binary-Elementes enthalten, das weiter oben
+     in dieser WXS-Datei definiert ist (in diesem Beispiel "Logo").
+     Möglich ist das Einfügen von Dateien in den Formaten BMP und JPG.
+-->
+        <Control Id="MeinBitmap"
+                 Type="Bitmap"
+                 Text="Logo"
+                 Height="188"
+                 Width="218"
+                 X="145"
+                 Y="10"
+                 TabSkip="no" />
+
+<!-- Weitere Control-Elemente
      Control-Elemente definieren Schalter, Textfelder, Checkboxen u.ä. innerhalb
-     des Dialogfensters. Hier werden ein Textfeld und ein Schalter ("PushButton")
-     mit der Aufschrift "Next" mit Größen- und Positionsangaben definiert.
+     des Dialogfensters. Hier werden mehrere Control-Elemente mit Größen- und
+     Positionsangaben definiert.
      Im Textfeld wird demonstriert, wie man die weiter oben definierten Text-Styles
-     anwendet: Mit der Angabe {\Tahoma_Bold} innerhalb des Textes.
+     anwendet: Mit der Angabe {\Tahoma_Bold} am Anfang des Textes. Styles können nicht
+     innerhalb des Textes geändert werden.
      Im Publish-Element wird festgelegt, was passieren soll, wenn der Benutzer den
      dazu gehörigen Schalter anklickt.
      Mit dem Attribut "NewDialog" wird das aktuelle Dialogfenster geschlossen und
      stattdessen das nächste geöffnet (wie beim "FortschrittDialogFenster").
-     Mit dem Attribut "SpawnDialog" wird ein Kindfenster geöffnet (z.B. eine MessageBox),
-     das aktuelle Fenster bleibt aber im Hintergrund sichtbar und bekommt den Fokus zurück,
-     sobald das Kindfenster geschlossen wird.
+     Mit dem Attribut "SpawnDialog" wird ein Kindfenster geöffnet (wie beim
+     "MeinZweitesDialogFenster"), das aktuelle Fenster bleibt aber im Hintergrund
+     sichtbar und bekommt den Fokus zurück, sobald das Kindfenster geschlossen wird.
      Mit dem Attribut "EndDialog" wird das aktuelle Dialogfenster geschlossen, ohne
      dass ein weiteres Fenster geöffnet wird (beim Wert "Exit"). Wenn das aktuelle
      Dialogfenster das Kind eines anderen Fensters ist (also von diesem mit "SpawnDialog"
-     geöffnet wurde), muss der Wert "Return" angegeben werden, damit das Elternfenster
-     den Fokus zurück bekommt.
+     geöffnet wurde), muss statt "Exit" der Wert "Return" angegeben werden, damit das
+     Elternfenster den Fokus zurück bekommt.
 -->
         <Control Id="MeinText"
                  Type="Text"
                  X="10"
                  Y="10"
-                 Width="200"
-                 Height="17"
-                 Text="{\Tahoma_Bold}Dies ist ein fett gedruckter Beispieltext." />
-        
-        <Control Id="Next"
+                 Width="130"
+                 Height="50"
+                 NoWrap="no"
+                 Text="{\Tahoma_Bold}Dies ist ein fett gedruckter Beispieltext, der automatisch umgebrochen wird." />
+
+<!-- Control-Elemente können sich auch gegenseitig beeinflussen. In diesem Beispiel
+     kann durch das Anklicken einer Checkbox ein Button angezeigt und versteckt werden.
+     Dem Button wird dazu eine Condition hinzugefügt, die abfragt, ob in der Checkbox
+     das Attribut "CheckBoxValue" auf "sichtbar" gesetzt ist oder nicht (anstelle von
+     "sichtbar" kann dort ein beliebiger Wert stehen). Das Umschalten geschieht
+     automatisch bei jedem Klick auf die Checkbox. Der Anfangszustand ist "versteckt",
+     er kann aber durch Tauschen der beiden Conditions beim Button-Element geändert werden.
+     Mit derselben Methode kann der Button auch aktiviert und deaktiviert werden.
+-->
+        <!-- Diese Checkbox zeigt bzw. versteckt den Info-Button -->
+        <Control Id="MeineCheckbox1"
+                 Type="CheckBox"
+                 Property="MeineEigenschaft1"
+                 CheckBoxValue="sichtbar"
+                 Text="Easter Egg anzeigen"
+                 X="10"
+                 Y="230"
+                 Height="10"
+                 Width="100" />
+
+        <!-- Diese Checkbox aktiviert bzw. deaktiviert den Info-Button -->
+        <Control Id="MeineCheckbox2"
+                 Type="CheckBox"
+                 Property="MeineEigenschaft2"
+                 CheckBoxValue="aktiviert"
+                 Text="Easter Egg aktivieren"
+                 X="10"
+                 Y="246"
+                 Height="10"
+                 Width="100" />
+
+        <!-- Dieser Button wird mit den Checkboxen angezeigt bzw. aktiviert -->
+        <Control Id="HorseButton"
                  Type="PushButton"
                  X="115"
                  Y="243"
                  Width="56"
                  Height="17"
-                 Text="Info">
-          
+                 Text="Easter Egg">
+
+          <Condition Action="show">
+            <![CDATA[MeineEigenschaft1 = "sichtbar"]]>
+          </Condition>
+
+          <Condition Action="hide">
+            <![CDATA[MeineEigenschaft1 <> "sichtbar"]]>
+          </Condition>
+
+          <Condition Action="enable">
+            <![CDATA[MeineEigenschaft2 = "aktiviert"]]>
+          </Condition>
+
+          <Condition Action="disable">
+            <![CDATA[MeineEigenschaft2 <> "aktiviert"]]>
+          </Condition>
+
           <Publish Event="SpawnDialog"
-                   Value="MeinZweitesDialogFenster" />
+                   Value="EasterEggFenster" />
         </Control>
 
-        <Control Id="InstallButton"
+        <Control Id="InfoButton"
                  Type="PushButton"
-                 Text="Installieren"
-                 Height="17"
+                 Text="Info"
+                 X="180"
+                 Y="243"
                  Width="56"
-                 X="245"
-                 Y="243">
-          
-          <Publish Event="NewDialog"
-                   Value="FortschrittDialogFenster" />
+                 Height="17">
+
+          <Publish Event="SpawnDialog"
+                   Value="MeinZweitesDialogFenster" />
         </Control>
 
         <Control Id="CancelButton"
                  Type="PushButton"
                  Text="Abbrechen"
+                 X="245"
+                 Y="243"
                  Height="17"
                  Width="56"
-                 X="180"
-                 Y="243"
                  Cancel="yes">
-          
+
           <Publish Event="EndDialog"
                    Value="Exit" />
         </Control>
-        
+
+        <Control Id="InstallButton"
+                 Type="PushButton"
+                 Text="Installieren"
+                 X="310"
+                 Y="243"
+                 Height="17"
+                 Width="56">
+
+          <Publish Event="NewDialog"
+                   Value="FortschrittDialogFenster" />
+        </Control>
+
       </Dialog>
       
     </UI>

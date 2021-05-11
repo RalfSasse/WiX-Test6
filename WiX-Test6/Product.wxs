@@ -21,8 +21,11 @@
              InstallScope="perMachine" />
 
 		<MajorUpgrade DowngradeErrorMessage="Eine neuere Version von [ProductName] ist bereits installiert." />
-    
-		<MediaTemplate />
+
+<!-- Hier wird mit dem Parameter "EmbedCab" festgelegt, dass die .CAB-Datei
+     (mit der Datei "EasterEgg.rtf") in die .MSI-Datei eingebettet wird.
+-->
+    <MediaTemplate EmbedCab="yes"/>
 
 <!-- UIRef-Element
      Verweis auf das User-Interface (UI-Element) in der Datei "Dialog1.wxs", in dem

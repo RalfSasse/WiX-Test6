@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Dialog2.wxs
+<!-- Pferd.wxs
 -->
 
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
 
-	<Fragment>
+  <Fragment>
 
     <UI>
-      
+
 <!-- Dieses Dialogfenster wird als Kindfenster von "MeinErstesDialogfenster"
      geöffnet. Damit es ordnungsgemäß geschlossen wird und das Elternfenster
      den Fokus zurück bekommt, muss das Publish-Element den Wert "Return"
      enthalten.
 -->
-      <Dialog Id="MeinZweitesDialogFenster"
-              Width="300"
+      <Dialog Id="EasterEggFenster"
               Height="200"
-              Title="WiX-Test6 Installation">
+              Width="300"
+              Title="Easter Egg">
 
 <!-- Automatische Zeilenumbrüche in Textfeldern werden mit dem Attribut
      "NoWrap" eingeschaltet. Der Textfluss orientiert sich dann an den
@@ -29,24 +29,17 @@
      is to use multiple one-line text controls located below each other."
      Ein Text mit mehreren Absätzen erfordert also mehrere Textfelder.
 -->
-        <Control Id="MeinText1"
-                 Type="Text"
+        <Control Id="MeinScrollableText"
+                 Type="ScrollableText"
                  X="10"
                  Y="10"
+                 Height="160"
                  Width="280"
-                 Height="50"
-                 NoWrap="no"
-                 Text="{\Tahoma_Red}Dieses Dialogfenster funktioniert wie eine MessageBox. Das aufrufende Fenster bleibt geöffnet. Beim Klick auf OK wird der Fokus an das aufrufende Fenster zurückgegeben." />
-
-        <Control Id="MeinText2"
-                 Type="Text"
-                 X="10"
-                 Y="40"
-                 Width="280"
-                 Height="50"
-                 NoWrap="no"
-                 Text="{\Tahoma_Blue}Dies ist der zweite Absatz dieses Textes. Weil es in WiX keinen manuellen Zeilenumbruch zu geben scheint, erfordert jeder Absatz ein eigenes Textfeld. Jeder Absatz kann eine andere Farbe haben, allerdings ist ein Farbwechsel innerhalb eines Absatzes nicht möglich." />
-
+                 Sunken="yes">
+          
+          <Text SourceFile="EasterEgg.rtf" />
+        </Control>
+        
         <Control Id="OkButton"
                  Type="PushButton"
                  X="200"
@@ -54,16 +47,17 @@
                  Width="50"
                  Height="20"
                  Text="OK">
-          
+
           <Publish Event="EndDialog"
                    Value="Return" />
-          
+
         </Control>
-        
+
       </Dialog>
-      
+
     </UI>
 
   </Fragment>
-  
+
 </Wix>
+

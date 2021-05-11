@@ -29,6 +29,7 @@
     <Compile Include="ExitDlg.wxs" />
     <Compile Include="FatalError.wxs" />
     <Compile Include="FilesInUse.wxs" />
+    <Compile Include="EasterEgg.wxs" />
     <Compile Include="Product.wxs" />
     <Compile Include="UserExit.wxs" />
   </ItemGroup>
