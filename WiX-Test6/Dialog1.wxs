@@ -98,6 +98,7 @@
      Verweise auf andere Dialogfenster
 -->
       <DialogRef Id="MeinZweitesDialogFenster" />
+      <DialogRef Id="MeinDrittesDialogFenster" />
       <DialogRef Id="FortschrittDialogFenster" />
       <DialogRef Id="EasterEggFenster" />
       <DialogRef Id="FilesInUse" />
@@ -196,7 +197,7 @@
                  Width="100" />
 
         <!-- Dieser Button wird mit den Checkboxen angezeigt bzw. aktiviert -->
-        <Control Id="HorseButton"
+        <Control Id="EasterEggButton"
                  Type="PushButton"
                  X="115"
                  Y="243"

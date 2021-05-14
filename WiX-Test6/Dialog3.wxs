@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Dialog3.wxs
+-->
+
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+
+	<Fragment>
+
+    <UI>
+      
+<!-- Dieses Dialogfenster wird als Kindfenster von "MeinZweitesDialogFenster"
+     geöffnet. Damit es ordnungsgemäß geschlossen wird und das Elternfenster
+     den Fokus zurück bekommt, muss das Publish-Element den Wert "Return"
+     enthalten.
+-->
+      <Dialog Id="MeinDrittesDialogFenster"
+              Width="200"
+              Height="100"
+              Title="WiX-Test6 Installation" >
+
+<!-- An dieser Stelle wird ein Text ausgegeben mit der Information, welcher
+     der drei Radiobuttons aus "MeinZweitesDialogFenster" ausgewählt wurde.
+     Für jeden Radiobutton wird ein Text-Element mit einer Condition definiert.
+     Wenn die Condition nicht erfüllt ist, wird das Text-Element nicht angezeigt
+     (also mit dem Action-Attribut "hide" versteckt). Es wird also immer nur
+     der "richtige" Text angezeigt.
+     Umgekehrt - also nur einen Text mit dem Attribut "show" anzeigen statt
+     zwei Texte mit "hide" zu verstecken - funktioniert das nicht, weil der
+     Zustand "show" voreingestellt ist.
+-->
+        <Control Id="AuswertungRadioButton1"
+                 Type="Text"
+                 X="10"
+                 Y="10"
+                 Width="180"
+                 Height="50"
+                 Text="Radioknopf 1 wurde ausgewählt.">
+
+          <Condition Action="hide">
+            <![CDATA[buttonGroup <> "1"]]>
+          </Condition>
+        </Control>
+
+        <Control Id="AuswertungRadioButton2"
+                 Type="Text"
+                 X="10"
+                 Y="10"
+                 Width="180"
+                 Height="50"
+                 Text="Radioknopf 2 wurde ausgewählt.">
+
+          <Condition Action="hide">
+            <![CDATA[buttonGroup <> "2"]]>
+          </Condition>
+        </Control>
+
+        <Control Id="AuswertungRadioButton3"
+                 Type="Text"
+                 X="10"
+                 Y="10"
+                 Width="180"
+                 Height="50"
+                 Text="Radioknopf 3 wurde ausgewählt.">
+
+          <Condition Action="hide">
+            <![CDATA[buttonGroup <> "3"]]>
+          </Condition>
+        </Control>
+
+        <Control Id="OkButton"
+                 Type="PushButton"
+                 X="120"
+                 Y="70"
+                 Width="50"
+                 Height="20"
+                 Text="OK">
+
+          <Publish Event="EndDialog"
+                   Value="Return" />
+        </Control>
+
+      </Dialog>
+    
+    </UI>
+
+  </Fragment>
+  
+</Wix>

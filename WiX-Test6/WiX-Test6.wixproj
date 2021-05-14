@@ -24,6 +24,7 @@
   <ItemGroup>
     <Compile Include="Dialog1.wxs" />
     <Compile Include="Dialog2.wxs" />
+    <Compile Include="Dialog3.wxs" />
     <Compile Include="DialogFortschritt.wxs" />
     <Compile Include="ErrorDlg.wxs" />
     <Compile Include="ExitDlg.wxs" />

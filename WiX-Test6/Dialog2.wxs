@@ -9,6 +9,22 @@
 
     <UI>
       
+<!-- Hier werden die beiden Icons referenziert, die in diesem Dialogfenster
+     angezeigt werden (sie stammen beide aus den Wix-Sourcen).
+-->
+      <Binary Id="Info"
+              SourceFile="info.ico" />
+      
+      <Binary Id="Hilfe"
+              SourceFile="help.ico" />
+      
+<!-- Für die Gruppe von Radiobuttons muss an dieser Stelle eine Property
+     definiert werden. Innerhalb des Control-Elementes muss seine Id
+     referenziert werden.
+-->
+      <Property Id="buttonGroup"
+                Value="1" />
+      
 <!-- Dieses Dialogfenster wird als Kindfenster von "MeinErstesDialogfenster"
      geöffnet. Damit es ordnungsgemäß geschlossen wird und das Elternfenster
      den Fokus zurück bekommt, muss das Publish-Element den Wert "Return"
@@ -47,6 +63,106 @@
                  NoWrap="no"
                  Text="{\Tahoma_Blue}Dies ist der zweite Absatz dieses Textes. Weil es in WiX keinen manuellen Zeilenumbruch zu geben scheint, erfordert jeder Absatz ein eigenes Textfeld. Jeder Absatz kann eine andere Farbe haben, allerdings ist ein Farbwechsel innerhalb eines Absatzes nicht möglich." />
 
+<!-- Control-Element "Icon"
+     Hier werden zwei Icons in "MeinZweitesDialogfenster" eingefügt.
+     Das Attribut "Text" muss die Id des Binary-Elementes enthalten, das weiter oben
+     in dieser WXS-Datei definiert ist (in diesen Beispielen "Info" und "Hilfe").
+     Icons können eine Größe von 16*16, 32*32 oder 48*48 Pixeln haben. Die Größe
+     muss in den Attributen "Width", "Height" und "IconSize" angegeben werden.
+     Icons werden aber automatisch skaliert: Das Info-Icon hat eigentlich eine Größe
+     von 16*16 Pixeln, wird aber hier auf 48*48 Pixel vergrößert.
+-->
+        <Control Id="MeinInfoIcon"
+                 Type="Icon"
+                 Text="Info"
+                 X="10"
+                 Y="90"
+                 Width="48"
+                 Height="48"
+                 IconSize="48" />
+
+        <Control Id="MeinHilfeIcon"
+                 Type="Icon"
+                 Text="Hilfe"
+                 X="60"
+                 Y="90"
+                 Width="48"
+                 Height="48"
+                 IconSize="48" />
+        
+<!-- Control-Element "RadioButton"
+     Hier wird eine Gruppe von drei Radiobuttons in "MeinZweitesDialogfenster" eingefügt.
+     Um sie einzurahmen kann man eine GroupBox darum herum zeichnen (muss man aber nicht).
+     Anders als Checkboxen werden Radiobuttons in Gruppen angeordnet, von denen jeweils
+     nur ein Button ausgewählt sein kann. Zu diesem Zweck gibt es das Control-Element
+     "RadioButtonGroup", in dem sich die einzelnen Control-Elemente vom Typ "RadioButton"
+     befinden. Die Funktionalität liegt in der "RadioButtonGroup", die "GroupBox" ist nur
+     der optische Rahmen drumherum.
+-->
+        <Control Id="MeineGroupBox"
+                 Type="GroupBox"
+                 Text="Ein paar Radioknöpfe..."
+                 X="110"
+                 Y="90"
+                 Width="100"
+                 Height="70" />
+
+        <Control Id="myRadioGroup"
+                 Type="RadioButtonGroup"
+                 Property="buttonGroup"
+                 X="120"
+                 Y="100"
+                 Width="80"
+                 Height="60" >
+          
+<!-- Die Property "buttonGroup" enthält den Value des ausgewählten Radiobuttons, also "1", "2"
+     oder "3". Dieser Wert kann später mit einer Condition abgefragt werden. Das funktioniert
+     auch in anderen Dialogfenstern (siehe MeinDrittesDialogFenster).
+-->
+          <RadioButtonGroup Property="buttonGroup">
+            
+            <RadioButton Value="1"
+                         Text="Erster Knopf"
+                         Height="15"
+                         Width="70"
+                         X="0"
+                         Y="5" />
+            
+            <RadioButton Value="2"
+                         Text="Zweiter Knopf"
+                         Height="15"
+                         Width="70"
+                         X="0"
+                         Y="20" />
+            
+            <RadioButton Value="3"
+                         Text="Dritter Knopf"
+                         Height="15"
+                         Width="70"
+                         X="0"
+                         Y="35" />
+          
+          </RadioButtonGroup>
+        
+        </Control>
+        
+<!-- Der "AuswertenButton" öffnet ein weiteres modales Dialogfenster "MeinDrittesDialogFenster".
+     Wenn dort der "OkButton" angeklickt wird, geht der Fokus auf dieses Dialogfenster zurück.
+-->
+        <Control Id="AuswertenButton"
+                 Type="PushButton"
+                 X="110"
+                 Y="175"
+                 Width="60"
+                 Height="20"
+                 Text="Auswerten">
+
+          <Publish Event="SpawnDialog"
+                   Value="MeinDrittesDialogFenster" />
+        </Control>
+        
+<!-- Der "OkButton" gibt den Fokus an das aufrufende "MeinErstesDialogFenster" zurück.
+-->
         <Control Id="OkButton"
                  Type="PushButton"
                  X="200"
@@ -54,14 +170,13 @@
                  Width="50"
                  Height="20"
                  Text="OK">
-          
+
           <Publish Event="EndDialog"
                    Value="Return" />
-          
         </Control>
-        
+
       </Dialog>
-      
+    
     </UI>
 
   </Fragment>
