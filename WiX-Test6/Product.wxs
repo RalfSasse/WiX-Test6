@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
   
 <!-- Product-Element
      Wurzel des gesamten Projektes; kommt nur in dieser Datei vor. Alle anderen
@@ -8,7 +10,7 @@
      Das Language-Attribut definiert die Sprache: 1033 ist englisch, 1031 ist deutsch.
      Das Codepage-Attribut ist notwendig, um in Texten Umlaute ausgeben zu können.
 -->
-	<Product Id="*" 
+  <Product Id="*" 
            Name="WiX_Test6"
            Language="1033"
            Codepage="1252"
@@ -26,6 +28,7 @@
      (mit der Datei "EasterEgg.rtf") in die .MSI-Datei eingebettet wird.
 -->
     <MediaTemplate EmbedCab="yes"/>
+    
 
 <!-- UIRef-Element
      Verweis auf das User-Interface (UI-Element) in der Datei "Dialog1.wxs", in dem
@@ -39,12 +42,25 @@
              Level="1">
       
 			<ComponentGroupRef Id="ProductComponents" />
+      
     
 		</Feature>
   
 	</Product>
 
-	<Fragment>
+<!--
+  <Fragment>
+    <util:RegistrySearchRef Id="NETFRAMEWORK45"/>
+  </Fragment>
+-->
+
+
+
+
+
+  
+  
+  <Fragment>
 		<Directory Id="TARGETDIR"
                Name="SourceDir">
       

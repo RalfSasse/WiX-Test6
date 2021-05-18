@@ -3,7 +3,32 @@
 <!-- Dialog1.wxs
 -->
 
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"
+     xmlns:util="http://schemas.microsoft.com/wix/UtilExtension"
+     xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension">
+  
+
+  <?define NetFx48MinRelease = 528040 ?>
+  
+  <Fragment>
+    <PropertyRef Id="WIXNETFX4RELEASEINSTALLED" />
+    <Property Id="WIX_IS_NETFRAMEWORK_48_OR_LATER_INSTALLED" Secure="yes" />
+    <SetProperty Id="WIX_IS_NETFRAMEWORK_48_OR_LATER_INSTALLED" Value="1" After="AppSearch">
+      WIXNETFX4RELEASEINSTALLED >= "#$(var.NetFx48MinRelease)"
+    </SetProperty>
+  </Fragment>
+
+<!--
+  <Fragment>
+    <Property Id="NETFRAMEWORK48VORHANDEN">
+      <RegistrySearch Id="NetFramework48Vorhanden"
+                      Root="HKLM"
+                      Key="SOFTWARE\Microsoft\NET Framework Setup\NDP\v4\Full"
+                      Name="Release"
+                      Type="raw" />
+    </Property>
+  </Fragment>
+-->
 
 <!-- Fragment-Element
      Jedes Dialogfenster sollte in einer eigenen WXS-Datei definiert werden.
@@ -107,7 +132,16 @@
       <DialogRef Id="UserExit" />
       <DialogRef Id="ExitDlg" />
 
-<!-- Dialog-Element
+      
+
+      
+  <Property Id="MeineVariable"
+            Value="Holla" />
+  
+
+
+
+      <!-- Dialog-Element
      Hier beginnt die Definition des Dialogfensters.
      Das Dialog-Element enthält Attribute für die Breite und Höhe des Dialogfensters
      (in Pixeln) und für den Text in der Titelzeile.
@@ -165,6 +199,65 @@
                  NoWrap="no"
                  Text="{\Tahoma_Bold}Dies ist ein fett gedruckter Beispieltext, der automatisch umgebrochen wird." />
 
+<!-- In diesen Control-Elementen sollte angezeigt werden, ob auf dem Zielrechner .NET Framework 4.8
+     und .NET Core 3.1 installiert sind.
+-->
+        <Control Id="NETFramework48Vorhanden"
+                 Type="Text"
+                 X="10"
+                 Y="50"
+                 Width="130"
+                 Height="50"
+                 Text=".NET Framework 4.8 vorhanden.">
+
+          <Condition Action="hide">
+            <![CDATA[WIX_IS_NETFRAMEWORK_48_OR_LATER_INSTALLED]]>
+          </Condition>
+        </Control>
+
+        <Control Id="NETFramework48NichtVorhanden"
+                 Type="Text"
+                 X="10"
+                 Y="60"
+                 Width="130"
+                 Height="50"
+                 Text=".NET Framework 4.8 fehlt.">
+
+          <Condition Action="hide">
+            <![CDATA[NOT WIX_IS_NETFRAMEWORK_48_OR_LATER_INSTALLED]]>
+          </Condition>
+        </Control>
+
+        <Control Id="NETCore31Vorhanden"
+                 Type="Text"
+                 X="10"
+                 Y="70"
+                 Width="130"
+                 Height="50"
+                 Text=".NET Core 3.1 vorhanden.">
+
+          <Condition Action="hide">
+            <![CDATA[NetCorex86Installed OR NetCorex64Installed]]>
+          </Condition>
+        </Control>
+
+        <Control Id="NETCore31NichtVorhanden"
+                 Type="Text"
+                 X="10"
+                 Y="80"
+                 Width="130"
+                 Height="50"
+                 Text=".NET Core 3.1 fehlt.">
+
+          <Condition Action="hide">
+            <![CDATA[(NOT NetCorex86Installed) AND (NOT NetCorex64Installed)]]>
+          </Condition>
+        </Control>
+
+<!--         
+        <![CDATA[Installed OR (WIXNETFX4RELEASEINSTALLED >= "#528040")]]>
+-->
+        
 <!-- Control-Elemente können sich auch gegenseitig beeinflussen. In diesem Beispiel
      kann durch das Anklicken einer Checkbox ein Button angezeigt und versteckt werden.
      Dem Button wird dazu eine Condition hinzugefügt, die abfragt, ob in der Checkbox
